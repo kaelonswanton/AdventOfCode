@@ -1,11 +1,11 @@
 # game_hash = {A: 'rock', B: 'paper', C: 'scissors', X: 'rock', Y: 'paper', Z: 'scissors'}
 # points = {'rock' => 1, 'paper' => 2, 'scissors' => 3}
 
-# lines = File.read('file').split("\n") #split into an array of strings
+# lines = File.read('file').split("\n") 
 # to_game_hash = lines.map do |line|
-#   line.split #split each line into an array of letters
-#   .map { |letters| game_hash[letters.to_sym]} #iterate over each array, match with game_hash
-# end #game_hash[letter.to_sym] turns each letter in the array to a symbol, looks for the symbol in the hash, then returns its value
+#   line.split 
+#   .map { |letters| game_hash[letters.to_sym]} 
+# end 
 
 # score = 0
 # to_game_hash.each do |opponent, player|
@@ -21,10 +21,10 @@
 # puts score
 
 class Game
-  attr_reader :game_hash, :points
+  attr_reader :game_hash, :file
 
   def initialize(file)
-    @file = File.read(file).split("\n")
+    @file = file
     @game_hash = {A: 'rock', B: 'paper', C: 'scissors', X: 'rock', Y: 'paper', Z: 'scissors'}
     @game_points = {'rock' => 1, 'paper' => 2, 'scissors' => 3} 
   end
@@ -45,11 +45,15 @@ class Game
   end
 
   private
+  def lines
+    file.split("\n")
+  end
+
   def to_game_hash
-    @file.map do |line|
+    lines.map do |line|
       line.split.map { |letters| game_hash[letters.to_sym] }
     end
   end
 end
 
-Game.new('file').call
+Game.new(File.read("file")).call
