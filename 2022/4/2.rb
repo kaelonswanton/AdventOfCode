@@ -11,11 +11,16 @@ class NumberRange
 
     lines.each do |line|
       numbers = line.scan(/\d+/).map(&:to_i)
-      first = (numbers[0]..numbers[1]).to_a
-      second = (numbers[2]..numbers[3]).to_a
+      first, second = create_ranges(numbers)
       count += check_overlap(first, second)
     end
     p count
+  end
+
+  def create_ranges(numbers)
+    first = (numbers[0]..numbers[1]).to_a
+    second = (numbers[2]..numbers[3]).to_a
+    [first, second]
   end
       
   def check_overlap(first, second)
