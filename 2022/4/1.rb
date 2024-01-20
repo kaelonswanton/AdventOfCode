@@ -1,4 +1,7 @@
-require 'set'
+# frozen_string_literal: true
+
+require "set"
+
 class NumberRange
   attr_reader :file
 
@@ -21,7 +24,7 @@ class NumberRange
     second = (numbers[2]..numbers[3]).to_a
     [first, second]
   end
-      
+
   def check_overlap(first, second)
     first_set = first.to_set
     second_set = second.to_set
@@ -33,4 +36,4 @@ class NumberRange
   end
 end
 
-NumberRange.new(File.read('file')).call
+NumberRange.new(File.read("file")).call

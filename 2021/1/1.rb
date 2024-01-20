@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class To_Array
   def self.to_integer(file)
     File.read(file).split("\n").map(&:to_i)

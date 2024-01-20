@@ -1,0 +1,4 @@
+# .rubocop.yml
+inherit_gem:
+  rubocop-inhouse:
+  - config/default.yml # generic Ruby rules and cops

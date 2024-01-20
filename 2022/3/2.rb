@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Lines
   attr_reader :lines
 
@@ -11,7 +13,7 @@ class Lines
 
   def common_chars
     group_lines.map do |group|
-      group.map(&:chars).inject(:&)
+      group.map(&:chars).reduce(:&)
     end
   end
 end
@@ -24,9 +26,7 @@ class Puzzle
   def call
     Lines.new(@file)
       .common_chars
-      .flatten
-      .map { |char| to_integer(char) }
-      .sum
+      .flatten.sum { |char| to_integer(char) }
   end
 
   def to_integer(char)
@@ -38,4 +38,4 @@ class Puzzle
   end
 end
 
-p Puzzle.new(File.read('file')).call
+p Puzzle.new(File.read("file")).call

@@ -1,13 +1,4 @@
-#Split a string in half, find common letter from both
-#Turn letter into number, sum
-#lower_case = (char.ord)-96 # 1
-#upper_case =  (char.ord)-38 # 27
-
-# half = string.length / 2
-# p first_half = string.slice(0, half)
-# p second_half = string.slice(half, string.length)
-# common_chars = first_half.chars & second_half.chars
-# p common_chars
+# frozen_string_literal: true
 
 class Line
   attr_reader :string
@@ -32,7 +23,7 @@ class Line
   end
 
   def common_chars
-    head, tail = halves #gives us the local variables from #halves
+    head, tail = halves
     head.chars & tail.chars
   end
 
@@ -51,14 +42,14 @@ class Puzzle
   attr_reader :file
 
   def initialize(file)
-   @file = file  
+    @file = file
   end
 
   def call
     strings.map do |string|
       line = Line.new(string)
       line.sum_of_common_chars
-      .sum
+        .sum
     end
   end
 
@@ -67,4 +58,4 @@ class Puzzle
   end
 end
 
-p Puzzle.new(File.read('file')).call.sum
+p Puzzle.new(File.read("file")).call.sum

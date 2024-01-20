@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Movement
   def self.from_file(path)
     new(File.readlines(path))
@@ -18,19 +20,15 @@ class Movement
   end
 
   def forward
-    movement_for('forward')
+    movement_for("forward")
   end
 
   def up
-    movement_for('up')
+    movement_for("up")
   end
 
   def down
-    movement_for('down')
-  end
-
-  def depth
-    down - up
+    movement_for("down")
   end
 
   def horizontal
@@ -40,10 +38,8 @@ class Movement
   def movement_for(direction)
     @lines
       .select { |line| line.include?(direction) }
-      .map { |movement| movement.split(' ').last.to_i}
-      .sum
+      .sum { |movement| movement.split.last.to_i }
   end
-
 end
 
-p Movement.from_file('file').call
+p Movement.from_file("file").call

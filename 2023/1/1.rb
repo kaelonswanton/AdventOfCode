@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class Puzzle
   attr_reader :lines
+
   def self.from_file(path)
     new(File.readlines(path).map(&:chomp))
   end
@@ -22,11 +25,7 @@ class Puzzle
 
   def double_digits
     parse_digits.map do |subarray|
-      if subarray.length == 1
-        [subarray.first] + [subarray.first]
-      else
-        subarray
-      end
+      subarray.length == 1 ? subarray * 2 : subarray
     end
   end
 
@@ -37,4 +36,4 @@ class Puzzle
   end
 end
 
-p Puzzle.from_file('file').call
+p Puzzle.from_file("file").call
