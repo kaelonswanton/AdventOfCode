@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 module PuzzleOne
-file = "(((())))))))"
+  file = "(((())))))))"
+
   class PartOne
     attr_reader :file
 
