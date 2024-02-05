@@ -1,14 +1,8 @@
 # frozen_string_literal: true
 
-# remove x, l w h
-# 2*l*w, 2*w*h, 2*h*l
-# calculate l*w, then *2
-# the smallest number before *2, add to answer
-# 2x3x4 = 2*6 + 2*12 + 2*8 + 6 = 52
-
 require "debug"
 module PuzzleTwo
-  file = "2x3x4"
+  file = File.readlines("2015/file").map(&:chomp)
 
   class PartOne
     attr_reader :file
@@ -18,37 +12,33 @@ module PuzzleTwo
     end
 
     def call
-      (2 * (length * width)) +
-        (2 * (width * height)) +
-        (2 * (height * length)) +
-        smallest_side
+      file.map do |line|
+        calculate(line)
+      end.sum
     end
 
     private
 
-    def delete_x
-      file.delete("x")
+    def delete_x(line)
+      line.split("x")
     end
 
-    def length
-      delete_x[0].to_i
+    def dimensions(line)
+      delete_x(line).map(&:to_i)
     end
 
-    def width
-      delete_x[1].to_i
+    def smallest_side(length, width, height)
+      [length * width, width * height, height * length].min
     end
 
-    def height
-      delete_x[2].to_i
+    def calculate(line)
+      length, width, height = dimensions(line)
+      (2 * (length * width)) +
+        (2 * (width * height)) +
+        (2 * (height * length)) +
+        smallest_side(length, width, height)
     end
 
-    def smallest_side
-      [
-        [length * width],
-        [width * height],
-        [height * length]
-      ].min.first
-    end
   end
-  PartOne.new(file).call
+  puts PartOne.new(file).call
 end
