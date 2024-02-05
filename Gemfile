@@ -1,3 +1,4 @@
 source 'https://rubygems.org'
-gem 'rspec'
+gem "debug"
+gem "rspec"
 gem "rubocop-inhouse", require: false
